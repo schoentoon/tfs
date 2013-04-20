@@ -26,13 +26,13 @@ int tfs_opt_proc(void *data, const char *arg, int key, struct fuse_args *outargs
     fprintf(stderr, "USAGE: tfs\n");
     fprintf(stderr, "-h, --help\tShow this help.\n");
     fprintf(stderr, "-v, --version\tShow the version.\n");
-    fprintf(stderr, "-D, --debug\tEnable debugging.\n");
+    fprintf(stderr, "-D\t\tEnable debugging.\n");
     exit(1);
-    return 0;
+    return -1;
   case VERSION_ARG_KEY:
     fprintf(stderr, "Work in progress build.\n");
     exit(1);
-    return 0;
+    return -1;
   case DEBUG_ARG_KEY:
     options.debug = 1;
     return 0;

@@ -16,6 +16,9 @@
  */
 
 #include "tfs_args.h"
+#include "tfs_operations.h"
+
+#include <stdio.h>
 
 int main(int argc, char** argv) {
   struct fuse_args args = FUSE_ARGS_INIT(argc, argv);
@@ -26,7 +29,26 @@ int main(int argc, char** argv) {
     return 1;
   if (fuse_parse_cmdline(&args, &mountpoint, &multithreaded, &foreground) == -1)
     return 1;
-  if (opts.debug)
-    foreground = 1;
-  return 0;
+  struct fuse_chan *ch = fuse_mount(mountpoint, &args);
+  if (!ch)
+    return 1;
+  struct fuse *fuse = fuse_new(ch, &args, &tfs_oper, sizeof(struct fuse_operations), NULL);
+  if (!fuse) {
+    fuse_unmount(mountpoint, ch);
+    return 1;
+  }
+  if (options.debug == 1 ||  foreground == 1) {
+    if (fuse_daemonize(foreground) != -1)
+      return 1;
+  }
+  if (fuse_set_signal_handlers(fuse_get_session(fuse)) == -1) {
+    fuse_unmount(mountpoint, ch);
+    fuse_destroy(fuse);
+    return 1;
+  }
+  if (multithreaded)
+    return fuse_loop_mt(fuse);
+  if (!options.debug)
+    fprintf(stderr, "Running single threaded and we are not debugging, your performance may suffer.\n");
+  return fuse_loop(fuse);
 };

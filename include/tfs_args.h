@@ -15,8 +15,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _FUSE_ARGS_H
-#define _FUSE_ARGS_H
+#ifndef _TFS_ARGS_H
+#define _TFS_ARGS_H
 
 #define FUSE_USE_VERSION 26
 #include <fuse.h>
@@ -41,4 +41,4 @@ static struct fuse_opt tfs_opts[] = {
 
 int tfs_opt_proc(void *data, const char *arg, int key, struct fuse_args *outargs);
 
-#endif // _FUSE_ARGS_H
+#endif // _TFS_ARGS_H
