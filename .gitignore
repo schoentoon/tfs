@@ -15,3 +15,8 @@
 *.exe
 *.out
 *.app
+
+# tfs specify
+bin/
+build/
+tfs
