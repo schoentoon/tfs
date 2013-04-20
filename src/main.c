@@ -26,5 +26,7 @@ int main(int argc, char** argv) {
     return 1;
   if (fuse_parse_cmdline(&args, &mountpoint, &multithreaded, &foreground) == -1)
     return 1;
+  if (opts.debug)
+    foreground = 1;
   return 0;
 };
