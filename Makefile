@@ -20,10 +20,10 @@ build/main.o: src/main.c
 	$(CC) $(CFLAGS) $(DEFINES) $(INC) -c -o build/main.o src/main.c
 
 build/tfs_args.o: src/tfs_args.c include/tfs_args.h
-	$(CC) $(CFLAGS) $(DEFINES) $(INC) -c -o build/tfs_args.o src/tfs_args.c
+	$(CC) $(CFLAGS) $(DEFINES) $(INC) -Wno-unused-variable -c -o build/tfs_args.o src/tfs_args.c
 
 build/tfs_operations.o: src/tfs_operations.c include/tfs_operations.h
-	$(CC) $(CFLAGS) $(DEFINES) $(INC) -c -o build/tfs_operations.o src/tfs_operations.c
+	$(CC) $(CFLAGS) $(DEFINES) $(INC) -Wno-unused-variable -c -o build/tfs_operations.o src/tfs_operations.c
 
 build/multicast_listener.o: src/multicast_listener.c include/multicast_listener.h
 	$(CC) $(CFLAGS) $(DEFINES) $(INC) -c -o build/multicast_listener.o src/multicast_listener.c

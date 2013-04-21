@@ -22,49 +22,59 @@
 int tfs_access(const char *path, int mask) {
   if (options.debug)
     fprintf(stderr, "tfs_access(%s, %d);\n", path, mask);
+  return 0;
 };
 
 int tfs_getattr(const char *path, struct stat *stbuf) {
   if (options.debug)
     fprintf(stderr, "tfs_getattr(%s);\n", path);
+  return 0;
 };
 
 int tfs_fgetattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {
   if (options.debug)
     fprintf(stderr, "tfs_fgetattr(%s);\n", path);
+  return 0;
 };
 
 int tfs_open(const char *path, struct fuse_file_info *fi) {
   if (options.debug)
     fprintf(stderr, "tfs_open(%s);\n", path);
+  return 0;
 };
 
 int tfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
   if (options.debug)
     fprintf(stderr, "tfs_read(%s, size = %ld, offset = %ld);\n", path, size, offset);
+  return 0;
 };
 
 int tfs_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
   if (options.debug)
     fprintf(stderr, "tfs_write(%s, size = %ld, offset = %ld);\n", path, size, offset);
+  return 0;
 };
 
 int tfs_create(const char *path, mode_t m, struct fuse_file_info *fi) {
   if (options.debug)
     fprintf(stderr, "tfs_create(%s, %d);\n", path, m);
+  return 0;
 };
 
 int tfs_unlink(const char *path) {
   if (options.debug)
     fprintf(stderr, "tfs_unlink(%s);\n", path);
+  return 0;
 };
 
 int tfs_truncate(const char *path, off_t o) {
   if (options.debug)
     fprintf(stderr, "tfs_truncate(%s, %ld);\n", path, o);
+  return 0;
 };
 
 int tfs_rename(const char *src, const char *dst) {
   if (options.debug)
     fprintf(stderr, "tfs_rename(%s, %s);\n", src, dst);
+  return 0;
 };
