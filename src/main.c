@@ -17,6 +17,7 @@
 
 #include "tfs_args.h"
 #include "tfs_operations.h"
+#include "multicast_listener.h"
 
 #include <stdio.h>
 
@@ -46,6 +47,7 @@ int main(int argc, char** argv) {
     fuse_destroy(fuse);
     return 1;
   }
+  initMultiCastListener();
   if (multithreaded)
     return fuse_loop_mt(fuse);
   if (!options.debug)
