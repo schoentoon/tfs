@@ -19,8 +19,10 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include <pthread.h>
 #include <sys/types.h>
+#include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 
