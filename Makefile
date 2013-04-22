@@ -4,7 +4,7 @@ LFLAGS := $(shell pkg-config --libs fuse) -lpthread
 DEFINES:= $(DEFINES)
 CC     := gcc
 BINARY := tfs
-DEPS   := build/main.o build/tfs_args.o build/tfs_operations.o build/multicast_listener.o
+DEPS   := build/main.o build/tfs_args.o build/tfs_operations.o build/multicast.o
 
 .PHONY: all dev install
 
@@ -25,8 +25,8 @@ build/tfs_args.o: src/tfs_args.c include/tfs_args.h
 build/tfs_operations.o: src/tfs_operations.c include/tfs_operations.h
 	$(CC) $(CFLAGS) $(DEFINES) $(INC) -Wno-unused-variable -c -o build/tfs_operations.o src/tfs_operations.c
 
-build/multicast_listener.o: src/multicast_listener.c include/multicast_listener.h
-	$(CC) $(CFLAGS) $(DEFINES) $(INC) -c -o build/multicast_listener.o src/multicast_listener.c
+build/multicast.o: src/multicast.c include/multicast.h
+	$(CC) $(CFLAGS) $(DEFINES) $(INC) -c -o build/multicast.o src/multicast.c
 
 bin/tfs: build $(DEPS)
 	$(CC) $(CFLAGS) $(DEFINES) -o bin/$(BINARY) $(DEPS) $(LFLAGS)

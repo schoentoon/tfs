@@ -18,8 +18,12 @@
 #ifndef _MULTICAST_LISTENER_H
 #define _MULTICAST_LISTENER_H
 
+#include <stddef.h>
+
 #define MAXBUFSIZE 65536 // Max UDP Packet size is 64 Kbyte
 
 int initMultiCastListener();
+
+int multiCastRequest(unsigned char type, const char* path, const char* data, size_t length);
 
 #endif //_MULTICAST_LISTENER_H
