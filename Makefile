@@ -35,7 +35,7 @@ install: bin/tfs
 	cp -f $(BINARY) /usr/bin/$(BINARY)
 
 clean:
-	rm -rfv $(BINARY) $(DEPS)
+	rm -rfv bin/$(BINARY) $(DEPS)
 
 clang:
 	$(MAKE) dev CC=clang
