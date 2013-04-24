@@ -82,21 +82,19 @@ int initMultiCastListener() {
 };
 
 int multiCastRequest(unsigned char type, const char* path, const char* data, size_t length) {
-  char buffer[MAXBUFSIZE];
-  buffer[0] = type;
   size_t path_len = strlen(path) + 1; /* Yes we want to send the '\0' as well.. */
+  if (data == NULL)
+    length = 0;
+  size_t buffer_len = 1 + path_len + length;
   if (path_len + length > MAXBUFSIZE)
     return -1;
+  char buffer[MAXBUFSIZE];
+  buffer[0] = type;
   size_t i;
   for (i = 0; i < path_len; i++)
     buffer[i+1] = path[i];
-  if (data == NULL)
-    length = 0;
-  else {
-    for (i = 0; i < length; i++)
-      buffer[path_len+i] = data[i];
-  }
-  size_t buffer_len = 1 + path_len + length;
+  for (i = 0; i < length; i++)
+    buffer[path_len+i] = data[i];
   return sendto(getBroadcastSocket(), &buffer, buffer_len, 0, getBroadcastAddress(), sizeof(struct sockaddr_in));
 };
 
