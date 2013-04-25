@@ -17,7 +17,14 @@
 
 #include "tfs_operations.h"
 
+#include "multicast.h"
+
 #include <stdio.h>
+#include <string.h>
+
+#define TYPE_EXISTS 0
+#define TYPE_UNLINK 1
+#define TYPE_MOVE   2
 
 int tfs_access(const char *path, int mask) {
   if (options.debug)
@@ -40,6 +47,7 @@ int tfs_fgetattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi
 int tfs_open(const char *path, struct fuse_file_info *fi) {
   if (options.debug)
     fprintf(stderr, "tfs_open(%s);\n", path);
+  multiCastRequest(TYPE_EXISTS, path, NULL, 0);
   return 0;
 };
 
@@ -64,6 +72,7 @@ int tfs_create(const char *path, mode_t m, struct fuse_file_info *fi) {
 int tfs_unlink(const char *path) {
   if (options.debug)
     fprintf(stderr, "tfs_unlink(%s);\n", path);
+  multiCastRequest(TYPE_UNLINK, path, NULL, 0);
   return 0;
 };
 
@@ -76,5 +85,6 @@ int tfs_truncate(const char *path, off_t o) {
 int tfs_rename(const char *src, const char *dst) {
   if (options.debug)
     fprintf(stderr, "tfs_rename(%s, %s);\n", src, dst);
+  multiCastRequest(TYPE_MOVE, src, dst, strlen(dst)+1);
   return 0;
 };
